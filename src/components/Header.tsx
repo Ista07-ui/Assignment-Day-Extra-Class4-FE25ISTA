@@ -16,7 +16,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               className="text-[#1b0d0e] dark:text-white text-sm font-bold border-b-2 border-primary leading-normal"
-              href="#"
+              href="/"
             >
               Beranda
             </Link>
@@ -54,6 +54,11 @@ export default function Header() {
               />
             </div>
           </label>
+          <Link href="/login">
+            <button className="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-white border border-primary text-primary text-sm font-bold hover:bg-primary/5 transition-colors">
+              Masuk
+            </button>
+          </Link>
           <button className="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold hover:bg-red-700 transition-colors shadow-lg shadow-primary/20">
             Pesan Sekarang
           </button>
