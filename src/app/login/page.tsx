@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
     // In a real app, you would validate credentials here
-    router.push("/list-food");
+    router.push("/foods");
   };
 
   return (
