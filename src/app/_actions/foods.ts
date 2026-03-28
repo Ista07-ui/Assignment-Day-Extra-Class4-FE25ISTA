@@ -1,9 +1,17 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { FoodType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
+type FoodTypeInput = "upf" | "fresh";
+
+function parseFoodType(value: FormDataEntryValue | null): FoodTypeInput {
+  if (value === "upf" || value === "fresh") {
+    return value;
+  }
+  throw new Error("Invalid food type");
+}
 
 export async function getFoods() {
   const foods = await prisma.food.findMany({
@@ -29,9 +37,9 @@ export async function createFood(formData: FormData) {
   const description = formData.get("description") as string;
   const imageUrl = formData.get("imageUrl") as string;
   const ingredients = formData.get("ingredients") as string;
-  const type = formData.get("type") as FoodType;
+  const type = parseFoodType(formData.get("type"));
   const price = formData.get("price")
-    ? parseFloat(formData.get("price") as string)
+    ? Number.parseFloat(formData.get("price") as string)
     : null;
 
   if (!name || !description || !imageUrl || !ingredients || !type) {
@@ -58,9 +66,9 @@ export async function updateFood(id: string, formData: FormData) {
   const description = formData.get("description") as string;
   const imageUrl = formData.get("imageUrl") as string;
   const ingredients = formData.get("ingredients") as string;
-  const type = formData.get("type") as FoodType;
+  const type = parseFoodType(formData.get("type"));
   const price = formData.get("price")
-    ? parseFloat(formData.get("price") as string)
+    ? Number.parseFloat(formData.get("price") as string)
     : null;
 
   await prisma.food.update({
