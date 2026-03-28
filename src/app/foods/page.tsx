@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getFoods } from "../_actions/foods";
 import { Food } from "../types/food";
 
+export const dynamic = "force-dynamic";
+
 export default async function ListFoodPage() {
   const foods = await getFoods();
 
@@ -41,8 +43,11 @@ export default async function ListFoodPage() {
               >
                 Orders
               </a>
-              <Link className="text-sm font-medium text-[#f2c10d]" href="/foods">
-                 Foods
+              <Link
+                className="text-sm font-medium text-[#f2c10d]"
+                href="/foods"
+              >
+                Foods
               </Link>
             </nav>
             <Link href="/create-food">
@@ -73,7 +78,9 @@ export default async function ListFoodPage() {
             </p>
           </div>
           <div className="flex items-center gap-2 text-sm font-medium bg-[#f2c10d]/10 text-[#f2c10d] px-3 py-1 rounded-full">
-            <span className="material-symbols-outlined text-sm">inventory_2</span>
+            <span className="material-symbols-outlined text-sm">
+              inventory_2
+            </span>
             <span>{foods.length} Total Jajanan</span>
           </div>
         </div>
@@ -103,12 +110,12 @@ export default async function ListFoodPage() {
             </div>
           </div>
         </div>
-        
+
         {/* ImageGrid / Food List Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {foods.map((food: Food) => (
-            <Link 
-              href={`/foods/${food.id}`} 
+            <Link
+              href={`/foods/${food.id}`}
               key={food.id}
               className="group flex flex-col bg-white dark:bg-[#2c2715] rounded-xl overflow-hidden border border-slate-200 dark:border-white/5 cursor-pointer hover:border-[#f2c10d]/50 transition-all hover:shadow-xl hover:shadow-[#f2c10d]/5"
             >
@@ -120,7 +127,7 @@ export default async function ListFoodPage() {
                   }}
                 ></div>
                 <div className="absolute top-3 right-3 bg-green-500 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">
-                  {food.type === 'fresh' ? 'Fresh' : 'UPF'}
+                  {food.type === "fresh" ? "Fresh" : "UPF"}
                 </div>
               </div>
               <div className="p-5">
@@ -129,7 +136,9 @@ export default async function ListFoodPage() {
                     {food.name}
                   </h3>
                   {food.price && (
-                    <span className="text-[#f2c10d] font-bold">Rp {food.price.toLocaleString()}</span>
+                    <span className="text-[#f2c10d] font-bold">
+                      Rp {food.price.toLocaleString()}
+                    </span>
                   )}
                 </div>
                 <p className="text-slate-500 dark:text-[#cbbe90] text-sm leading-relaxed line-clamp-2">
@@ -140,28 +149,35 @@ export default async function ListFoodPage() {
                     {new Date(food.createdAt).toLocaleDateString()}
                   </span>
                   <div className="flex gap-2">
-                     <button className="text-[#f2c10d] font-medium text-sm">Lihat Detail</button>
+                    <button className="text-[#f2c10d] font-medium text-sm">
+                      Lihat Detail
+                    </button>
                   </div>
                 </div>
               </div>
             </Link>
           ))}
           {foods.length === 0 && (
-             <div className="col-span-full py-10 flex flex-col items-center justify-center text-center">
-                <p className="text-slate-500 text-lg">Belum ada makanan tersimpan.</p>
-                <Link href="/create-food" className="mt-4 text-[#f2c10d] hover:underline">
-                  Buat Makanan Baru
-                </Link>
-             </div>
+            <div className="col-span-full py-10 flex flex-col items-center justify-center text-center">
+              <p className="text-slate-500 text-lg">
+                Belum ada makanan tersimpan.
+              </p>
+              <Link
+                href="/create-food"
+                className="mt-4 text-[#f2c10d] hover:underline"
+              >
+                Buat Makanan Baru
+              </Link>
+            </div>
           )}
         </div>
 
         {/* Footer Pagination - placeholder for now */}
         <div className="mt-12 flex justify-center items-center gap-4">
-           {/* Pagination controls if needed */}
+          {/* Pagination controls if needed */}
         </div>
       </main>
-      
+
       <footer className="border-t border-slate-200 dark:border-white/5 py-8 mt-12 bg-white/50 dark:bg-black/20">
         <div className="max-w-[1200px] mx-auto px-6 text-center">
           <p className="text-slate-400 text-sm">
